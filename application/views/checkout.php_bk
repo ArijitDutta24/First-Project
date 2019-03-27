@@ -1,0 +1,37 @@
+<!-- Header -->
+
+<?php include('include/header.php');?>
+
+<!-- //Header -->
+
+
+<!-- Body -->
+
+  <!--start-->
+
+  <!-- Left Side Bar -->
+    <div class="slider_Wrapper aboutWrapper clearfix">
+    <?php foreach ($tour as $key => $value) {
+        
+    ?>
+     
+      
+  <!-- //Left Side Bar-->
+      
+  <!-- Right Side Bar -->
+
+        <?php include('include/right-side.php');?>
+
+  <!-- //Right Side Bar -->
+     <?php };?> 
+    </div>
+    <!--end-->
+
+<!-- //Body -->
+
+<!-- Footer -->
+
+<?php include('include/footer.php');?>
+
+<!-- //Footer -->
+

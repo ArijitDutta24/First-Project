@@ -1,0 +1,213 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Home extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function __construct(){
+		parent::__construct();
+		$this->load->helper('common_helper');
+		$this->load->model('banner_model');
+		$this->load->model('cms_model');
+		$this->load->model('packages_model');
+		$this->load->model('settings_model');
+		$this->load->helper('download');
+		// load Pagination library
+        $this->load->library('pagination');
+         
+        // load URL helper
+        $this->load->helper('url');
+		
+	}
+
+
+	public function index()
+	{
+		$content_data = array();
+		$banner = $this->banner_model->banner_fetchRecord();
+		$content_data['banner'] = $banner;
+		$home = $this->cms_model->about_fetchRecord();
+		$content_data['home'] = $home;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$deal = $this->packages_model->sidebarFetch();
+		$content_data['deal'] = $deal;
+		$this->load->view('index', $content_data);
+	}
+
+	public function about_us()
+	{	
+		$content_data = array();
+		$about = $this->cms_model->about_fetchRecord();
+		$content_data['about'] = $about;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$deal = $this->packages_model->sidebarFetch();
+    	$content_data['deal'] = $deal;
+		$this->load->view('about', $content_data);
+	}
+
+	public function download($cms_id)
+	{
+		$id = base64_decode($cms_id);
+		if(!empty($id))
+		{
+			
+			$download = $this->cms_model->fetchRow(array('cms_id'=>$id));
+			$data = base_url('assets/uploads/download/'.$download['cms_file']); 
+			// Read the file's contents
+        	$name = $download['cms_file'];
+        	force_download($name, $data);
+		}
+	}
+
+	public function tours()
+	{	
+		$content_data = array();
+		$tour = $this->cms_model->about_fetchRecord();
+		$content_data['tour'] = $tour;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		// $where = ['category'=>23];
+    	$deal = $this->packages_model->sidebarFetch();
+		$content_data['deal'] = $deal;
+		$this->load->view('tours', $content_data);
+	}
+
+	public function holiday()
+	{	
+		$content_data = array();
+		$holiday = $this->cms_model->about_fetchRecord();
+		$content_data['holiday'] = $holiday;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$deal = $this->packages_model->sidebarFetch();
+		$content_data['deal'] = $deal;
+		$pkg = $this->packages_model->getlist();
+		$content_data['packages'] = $pkg;
+		$where = ['category<>'=> 23];
+		$config = array();
+ 		$config["base_url"] = base_url() . "/holiday";
+ 		$config["total_rows"] = count($this->packages_model->record_count1($where));
+ 		$config["per_page"] = 6;
+ 		$config["uri_segment"] = 2;
+ 		$this->pagination->initialize($config);
+ 		$page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+       	$prod = $this->packages_model->prodlist($config["per_page"], $page);
+       	$content_data['products'] = $prod;
+		$content_data["links"] = $this->pagination->create_links();
+		$this->load->view('holiday', $content_data);
+	}
+
+
+	public function holiday_cat()
+	{	
+		$content_data = array();
+		$id = $this->uri->segment(3);
+		$cat_id = base64_decode($this->uri->segment(3));
+		$holiday = $this->cms_model->about_fetchRecord();
+		$content_data['holiday'] = $holiday;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$deal = $this->packages_model->sidebarFetch();
+		$content_data['deal'] = $deal;
+		$pkg = $this->packages_model->getlist();
+		$content_data['packages'] = $pkg;
+		$where = ['category'=> $cat_id];
+		$config = array();
+ 		$config["base_url"] = base_url() . "/holiday/cat/".$id;
+ 		$config["total_rows"] = count($this->packages_model->record_count1($where));
+ 		$config["per_page"] = 6;
+ 		$config["uri_segment"] = 4;
+ 		$this->pagination->initialize($config);
+ 		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+       	$prod = $this->packages_model->catprodlist($where, $config["per_page"], $page);
+        $content_data['products'] = $prod;
+		$content_data["links"] = $this->pagination->create_links();
+		$this->load->view('holiday', $content_data);
+	}
+
+
+	public function holiday_package()
+	{	
+		
+		$cat_id = base64_decode($this->uri->segment(2));
+		$content_data = array();
+		$holiday = $this->cms_model->about_fetchRecord();
+		$content_data['holiday'] = $holiday;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$deal = $this->packages_model->sidebarFetch();
+		$content_data['deal'] = $deal;
+		$where = ['product_id'=> $cat_id];
+		$pic = $this->packages_model->picFetch($where);
+		$content_data['picture'] = $pic;
+		$pop = $this->packages_model->mostFetch();
+		$content_data['popular'] = $pop;
+		$data = $this->packages_model->detailsFetch($where);
+		$content_data['details'] = $data;
+		// echo "<pre>";
+		// print_r($data);
+		// exit;
+		
+		$this->load->view('package_details', $content_data);
+	}
+
+	
+
+	public function groups()
+	{	
+		$content_data = array();
+		$group = $this->cms_model->about_fetchRecord();
+		$content_data['group'] = $group;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$deal = $this->packages_model->sidebarFetch();
+		$content_data['deal'] = $deal;
+		$this->load->view('groups', $content_data);
+	}
+
+	public function deals()
+	{	
+		$content_data = array();
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->dealFetch($where);
+		$content_data['deal'] = $deal;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$this->load->view('deals', $content_data);
+	}
+
+	public function contact_us()
+	{
+		$content_data = array();
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$about = $this->cms_model->about_fetchRecord();
+		$content_data['about'] = $about;
+		// $where = ['category'=>23];
+    	$deal = $this->packages_model->sidebarFetch();
+		$content_data['deal'] = $deal;
+		$this->load->view('contact', $content_data);
+	}
+
+
+	
+
+
+	
+}

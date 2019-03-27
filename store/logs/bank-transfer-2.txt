@@ -1,0 +1,114 @@
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: New sale added that requires payment via Bank Transfer
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Account creation set to YES on checkout, preparing to create account..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Account doesn`t exist. Creating account for "testdevloper007@gmail.com".
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Account successfully created and activated for "ritayan/testdevloper007@gmail.com".
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: 1 previous sales updated to account ID 7 where email is "testdevloper007@gmail.com".
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Sale will be updated with account id: 7
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Account creation operations completed
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Updating sale in database..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Sale updated..checking order type and writing status..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Status written and completed. Updating coupons if applicable..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: No coupon used. Checking gift certificates if applicable..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Payment method none gateway (Bank Transfer), so gift routines ignored. If required, trigger email manually via admin CP
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Beginning stock level checks..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Stock levels updated successfully.
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Sending order emails..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Email(s) sent to Heritage Expeditions Pvt Ltd webmaster > mchigubhu@macsoftlabs.com
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Email sent to ritayan @ testdevloper007@gmail.com..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Payment method none gateway (Bank Transfer), so drop shipping routines ignored. If required, trigger email manually via admin CP
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 21 January 2019 @ 23:07:PM
+Database ID: 2
+Action/Info: Displaying message and payment instructions to ritayan for Bank Transfer
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+

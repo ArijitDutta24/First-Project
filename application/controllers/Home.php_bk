@@ -1,0 +1,150 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Home extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function __construct(){
+		parent::__construct();
+		$this->load->helper('common_helper');
+		$this->load->model('banner_model');
+		$this->load->model('cms_model');
+		$this->load->model('settings_model');
+		$this->load->helper('download');
+		
+	}
+
+
+	public function index()
+	{
+		$content_data = array();
+		$banner = $this->banner_model->banner_fetchRecord();
+		$content_data['banner'] = $banner;
+		$home = $this->cms_model->about_fetchRecord();
+		$content_data['home'] = $home;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->sidebarFetch($where);
+		$content_data['deal'] = $deal;
+		$this->load->view('index', $content_data);
+	}
+
+	public function about_us()
+	{	
+		$content_data = array();
+		$about = $this->cms_model->about_fetchRecord();
+		$content_data['about'] = $about;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->sidebarFetch($where);
+		$content_data['deal'] = $deal;
+		$this->load->view('about', $content_data);
+	}
+
+	public function download($cms_id)
+	{
+		$id = base64_decode($cms_id);
+		if(!empty($id))
+		{
+			
+			$download = $this->cms_model->fetchRow(array('cms_id'=>$id));
+			$data = base_url('assets/uploads/download/'.$download['cms_file']); 
+			// Read the file's contents
+        	$name = $download['cms_file'];
+        	force_download($name, $data);
+		}
+	}
+
+	public function tours()
+	{	
+		$content_data = array();
+		$tour = $this->cms_model->about_fetchRecord();
+		$content_data['tour'] = $tour;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->sidebarFetch($where);
+		$content_data['deal'] = $deal;
+		$this->load->view('tours', $content_data);
+	}
+
+	public function holiday()
+	{	
+		$content_data = array();
+		$holiday = $this->cms_model->about_fetchRecord();
+		$content_data['holiday'] = $holiday;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->sidebarFetch($where);
+		$content_data['deal'] = $deal;
+		$this->load->view('holiday', $content_data);
+	}
+
+	public function groups()
+	{	
+		$content_data = array();
+		$group = $this->cms_model->about_fetchRecord();
+		$content_data['group'] = $group;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->sidebarFetch($where);
+		$content_data['deal'] = $deal;
+		$this->load->view('groups', $content_data);
+	}
+
+	public function deals()
+	{	
+		$content_data = array();
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->dealFetch($where);
+		$content_data['deal'] = $deal;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$this->load->view('deals', $content_data);
+	}
+
+	public function contact_us()
+	{
+		$content_data = array();
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$about = $this->cms_model->about_fetchRecord();
+		$content_data['about'] = $about;
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->sidebarFetch($where);
+		$content_data['deal'] = $deal;
+		$this->load->view('contact', $content_data);
+	}
+
+
+	public function sidebar()
+	{
+		$content_data = array();
+		$where = ['category'=>23];
+    	$deal = $this->cms_model->dealFetch($where);
+		$content_data['deal'] = $deal;
+		$this->load->view('include/right-side', $content_data);
+	}
+
+
+	
+}

@@ -1,0 +1,23 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Dashboard extends CI_Controller {
+	public function __construct(){
+		parent::__construct();
+		// $this->load->model('common_model');
+		// $this->load->model('product_model');
+		// $this->load->model('sell_model');
+	}
+
+	public function index(){
+	//	echo "sss";exit;
+		$content_data = array();
+		//$content_data['total_clients']=$this->common_model->getAll('tbl_user',array('user_type_id'=>7));
+		// $content_data['total_employees']=$this->common_model->getAll('tbl_user',array('user_type_id !='=>7));
+		// $content_data['total_projects']=$this->common_model->getAll('tbl_project');
+		 // $content_data['product']=$this->product_model->fetchRecord();
+		 // $content_data['sell']=$this->sell_model->fetchRecord(array('user_mobile !='=>'','user_email !='=>''));
+		$data['content'] = $this->load->view('admin/dashboard', $content_data, TRUE);
+		$this->load->view('admin/layout', $data);
+	}
+}

@@ -1,0 +1,114 @@
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: New sale added that requires payment via Bank Transfer
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Account creation set to YES on checkout, preparing to create account..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Account doesn`t exist. Creating account for "aditish@gmail.com".
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Account successfully created and activated for "Aditish Dutta/aditish@gmail.com".
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: 1 previous sales updated to account ID 9 where email is "aditish@gmail.com".
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Sale will be updated with account id: 9
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Account creation operations completed
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Updating sale in database..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Sale updated..checking order type and writing status..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Status written and completed. Updating coupons if applicable..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: No coupon used. Checking gift certificates if applicable..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Payment method none gateway (Bank Transfer), so gift routines ignored. If required, trigger email manually via admin CP
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Beginning stock level checks..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Stock levels updated successfully.
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Sending order emails..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Email(s) sent to Heritage Expeditions Pvt Ltd webmaster > mchigubhu@macsoftlabs.com
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Email sent to Aditish Dutta @ aditish@gmail.com..
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Payment method none gateway (Bank Transfer), so drop shipping routines ignored. If required, trigger email manually via admin CP
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DEBUG LOG @ 29 January 2019 @ 20:52:PM
+Database ID: 4
+Action/Info: Displaying message and payment instructions to Aditish Dutta for Bank Transfer
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+

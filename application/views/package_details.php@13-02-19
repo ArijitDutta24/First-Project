@@ -1,0 +1,535 @@
+<?php include('include/header.php');?>
+
+      <!--start-->
+      <?php foreach ($picture as $key => $val) {
+              $picture1 = base_url('store/content/products/demo/').$val['thumb_path'];
+              $pic1 = explode('-', $val['thumb_path']);
+              $pic2 = explode('.', $pic1[1]);
+              // print_r($pic2);
+              // exit;
+              if($pic2[0]==1)
+              {              
+      ?>
+      
+
+            <input type="hidden" id='img' value="<?php echo $picture1;?>">
+      <?php }}?>
+    <div class="slider_Wrapper clearfix mb0" id="refresh">
+      <?php foreach ($holiday as $key => $value) {
+        if($value['cms_title'] == 'Holiday Packages')
+        {
+        ?>
+      <div class="col8 details">
+         <div class="details_slider">
+          <?php foreach ($details as $key => $val) {?>
+           <h1><?php echo $val['pName'];?></h1>
+           <?php }?>
+           <div class="owl-carousel detailsBanner">
+            <?php foreach ($picture as $key => $val) {
+              $pic = base_url('store/content/products/demo/').$val['thumb_path'];
+
+              
+              
+              ?>
+             <div class="item">
+            
+                <img src="<?php echo $pic;?>" alt="">
+              
+              
+             </div>
+            <?php }?>
+
+             
+
+          </div>
+
+          <ul id="accordion" class="accordion mt30">
+              <li>
+                  <div class="link">Description <img src="<?php echo base_url('assets/images/chevron.svg');?>" alt=""></div>
+                  <?php foreach ($details as $key => $val) {?>
+                  <div class="submenu">
+                     <p><?php echo $val['pDescription'];?></p>
+                  </div>
+                <?php }?>
+              </li> 
+
+              <li>
+                  <div class="link">Product Video <img src="<?php echo base_url('assets/images/chevron.svg');?>" alt=""></div>
+                  <?php foreach ($details as $key => $val) {
+                    $video = $val['pVideo'];
+                    $video2 = $val['pVideo2'];
+                    $video3 = $val['pVideo3'];
+                   
+                    ?>
+                  <div class="submenu text-center">
+                    <?php if(!empty($video) || !empty($video2) || !empty($video))
+                    {?>
+                      <iframe src='<?php echo $video;?>'
+                        ></iframe>
+                        <iframe src='<?php echo $video2;?>'
+                        ></iframe>
+                        <iframe src='<?php echo $video3;?>'
+                        ></iframe>
+                        
+                    <?php }
+                    else{?>
+                    
+                     <p>No video is currently available for this product</p>
+                  </div>
+                  <?php }}?>
+              </li> 
+
+              
+
+              <li>
+                  <div class="link">Product Enquiry <img src="<?php echo base_url('assets/images/chevron.svg');?>" alt=""></div>
+                  <div class="submenu">
+                    <div class="alert alert-danger" id="errors" style="display: none;">
+                    <p><strong>Warning</strong> <span id="errormsgs">lorem ipsum doler sit amet</span></p>
+                  </div>
+                     <form action="#" method="post" onsubmit="return validation()">
+                        <div class="form_group">
+                          <label for="name">Name</label>
+                          <input type="text" id="name" name="name" class="form_control">
+                          <span id="namecheck">  </span>
+                        </div>
+
+                        <div class="form_group">
+                          <label for="email">Email</label>
+                          <input type="text" id="email" name="email" class="form_control">
+                          <span id="emailcheck">  </span>
+                        </div>
+
+                        <div class="form_group">
+                          <label for="comments">Comments</label>
+                          <textarea name="comments" id="comments" rows="5" class="form_control"></textarea>
+                          <span id="commentcheck">  </span>
+                        </div>
+
+                        <!-- <input type="submit" class="btn_primary" value="Send" onclick="insert()"> -->
+                        <a href="#" onclick="insert()" class="btn_primary">Send</a>
+                     </form>
+                  </div>
+              </li>
+
+          </ul>
+
+         </div>
+
+         <div class="details_content" id="details_content">
+           <div class="panel">
+             <div class="panel_heading">
+              <h4>What's Included</h4>
+             </div>
+                <?php foreach ($details as $key => $val) {?>
+             <div class="panel_body">
+               <div class="package_details">
+                <span>Availability:</span> 
+                <span>
+                  <input type="hidden" id="stock" value="<?php echo $val['pStock']?>">
+                <?php 
+                   if($val['pStock']>0)
+                    {
+                      echo 'Available';
+                    }
+                else
+                    {
+                      echo 'Not Available';
+                    }
+                 ?> 
+               </span>
+             </div>
+               <div class="package_details"><span>Code/Model No: </span> <span>
+                <input type="hidden" id="code" value="<?php echo $val['pCode']?>">
+                <input type="hidden" id="prodid" value="<?php echo $val['product']?>">
+                <input type="hidden" id="catid" value="<?php echo $val['category']?>">
+                <input type="hidden" id="prodName" value="<?php echo $val['pName']?>">
+                <input type="hidden" id="purchase" value="<?php echo $val['maxPurchaseQty']?>">
+                <?php
+                if(!empty($val['pCode']))
+                  {
+                    echo $val['pCode'];
+                  }
+                  else
+                  {?>
+                    N/A
+                  <?php }?>  
+                  </span>
+               </div>
+
+               <div class="package_details">
+                <span>Max Purchase Qty:</span> 
+                <span>
+                  
+                
+                      <?php echo $val['maxPurchaseQty'];?>
+                    
+               </span>
+             </div>
+
+               <div class="package_details price">$<?php 
+               if(!empty($val['pOffer']))
+                {
+                  echo $val['pOffer'];
+                }
+                else
+                {
+                  echo "0.00";
+                }   ?>
+                  <input type="hidden" id="offer" value="<?php echo $val['pOffer']?>">
+                </div>
+               <div class="package_details"><span>Qty: </span> 
+                <span>
+                  <input type="number" class="package_qty" min="1" id="qty" value="1" max="<?php if($val['maxPurchaseQty']>0){echo $val['maxPurchaseQty'];}?>">
+                </span>
+              </div>
+              <div class="alert alert-danger" id="btnerror" style="display: none;">
+                <p><strong>Warning</strong> <span id="btnerrormsg">lorem ipsum doler sit amet</span></p>
+              </div>
+
+               <button class="btn_secondary--large mt30" id="enquiry">Enquiry</button>
+               <?php 
+               if($val['maxPurchaseQty']>0 && $val['pStock'] > 0)
+               {
+                 $class = 'js__popup1';
+               }
+               else
+               {
+                 $class = '';
+               }
+               ?>
+
+               <button class="btn_primary--large mt30 <?php echo $class;?>" id="booknow" onclick="myFunction()"><img src="<?php echo base_url('assets/images/shopping-cart.svg');?>" width="20" alt=""> Book Now</button>
+             </div>
+           <?php }?>
+
+           </div>
+
+              <div class="panel">
+               <div class="panel_heading"><h4>MOST POPULAR PRODUCTS</h4></div>
+               <?php foreach ($popular as $popularvalue) {
+                    $pic = base_url('store/content/products/demo/').$popularvalue['thumb_path'];
+                    ?>
+                     <div class="panel_body">
+                        <a href="<?php echo base_url().'packages_details/'.base64_encode($popularvalue['product']);?>"><img src="<?php echo $pic;?>" alt=""></a>
+                        <div class="packages_content">
+                          <a href="<?php echo base_url().'packages_details/'. base64_encode($popularvalue['product']);?>"><p><?php echo $val['pTitle'];?></p></a>
+                          
+                        </div>
+                     </div>
+                <?php }?>
+             </div>
+         </div>
+          
+      </div>
+      <!-- Right Side Bar -->
+
+        <?php include('include/right-side.php');?>
+
+      <!-- //Right Side Bar -->
+      <?php }};?>
+    </div>
+    <!--end-->
+
+   <!-- Footer -->
+
+<?php include('include/footer.php');?>
+
+<!-- //Footer -->
+
+
+
+
+<script type="text/javascript">
+  
+  function myFunction() 
+  {
+  var stock = $("#stock").val();
+  var code = $("#code").val();
+  var offer = $("#offer").val();
+  var qty = $("#qty").val();
+  var prod = $("#prodid").val();
+  var cat = $("#catid").val();
+  var pName = $("#prodName").val();
+  var pic = $("#img").val();
+  var popUrl = "<?php echo base_url('Cart');?>";
+  var maxqty = $("#purchase").val();
+
+  console.log('stock'+stock);
+  console.log('code'+code);
+  console.log('offer'+offer);
+  console.log('qty'+qty);
+  console.log('prod'+prod);
+  console.log("cat"+cat);
+  console.log('pName'+pName);
+  console.log('maxqty'+maxqty);
+
+
+  
+  if(maxqty > 0 && stock > 0)
+  {
+     
+      $.ajax({
+        type : 'POST',
+        url  : popUrl,
+        data : { 
+                'stock' : stock, 
+                'code' : code,
+                'offer' : offer,
+                'qty' : qty,
+                'cat' : cat,
+                'prod' : prod,
+                'pName' : pName,
+                'image' : pic,
+                'max' : maxqty
+                
+              },
+        dataType : 'text',
+        success:function(data){
+          // alert(data);
+          $('.shopping-cart').html(data);
+          
+        }
+      });
+    
+  }
+  else
+  {
+    $('#btnerror').css("display","block");
+    $('#btnerrormsg').html('** Exceed Max Purchase Limit/Product Out Of Stock');
+  }
+
+}
+
+
+
+
+  
+
+
+</script>
+
+
+
+<script type="text/javascript">
+  
+//=======================Plus Button==========================//
+
+  $(document).on('click', '.qtyplus', function() {
+    var price = $(this).data('price');
+    var id = $(this).attr('id');
+    var counter = $("#quantity-"+ id).val();
+    var maxqty = $("#maxquantity-"+ id).val();
+    var stock = $("#stock").val();
+      
+      if(counter<maxqty && counter<stock)
+            {
+                 counter++;
+            }   
+                var newPrice = price * counter;
+                $.ajax({
+                  url : "<?php echo base_url();?>Cart/update",
+                  method : "POST",
+                  data : {id : id, qty : counter, price : newPrice},
+                  success : function (data) {
+                    $('.shopping-cart').html(data);
+                  }
+                });
+               
+               
+            });
+  
+
+
+
+//=====================Minus Button==============================//
+
+$(document).on('click', '.qtyminus', function() {
+      var price = $(this).data('price');
+      var id = $(this).attr("id");
+      var counter = $("#quantity-"+ id).val();
+
+       if(counter>1)
+            {
+                 counter--;
+                
+            }
+            var newPrice = price * counter;
+                
+                $.ajax({
+                  url : "<?php echo base_url();?>Cart/update",
+                  method : "POST",
+                  data : {id : id, qty : counter, price : newPrice},
+                  success : function (data) {
+                    $('.shopping-cart').html(data);
+                  }
+                });
+      
+            });
+
+
+
+//=======================Remove Button===========================//
+
+  $(document).on('click', '.remove-product', function() {
+    var delid = $(this).attr("id");
+    
+    $.ajax({
+      url : "<?php echo base_url();?>Cart/remove",
+      method : "POST",
+      data : {id : delid},
+      success : function (data) {
+        $('.shopping-cart').html(data);
+      }
+    });
+   
+  });
+
+  
+
+</script>
+
+
+
+<script type="text/javascript">
+  function check() {
+    var sesId   = "<?php echo $this->session->userdata('id');?>";
+    var popUrl  = "<?php echo base_url('Cart/login');?>";
+    var popUrl1 = "<?php echo base_url('Cart/loginAccess');?>";
+    var count   = $('#count').val();
+    if(sesId !== '')
+    {
+      if(count > 1)
+      {
+          $('#errors1').css("display","block");
+          $('#errormsgss').html('** You Can Buy Only One Packages At A Time');
+      }
+      else
+      {
+        window.location.href = popUrl1;
+      }
+    }
+    else
+    {
+      if(count > 1)
+      {
+        $('#errors1').css("display","block");
+        $('#errormsgss').html('** You Can Buy Only One Packages At A Time');
+      }
+      else
+      {
+          window.location.href = popUrl;
+      }
+    }
+    
+}
+
+
+function validation()
+{
+      var user    = document.getElementById('name').value;
+      var email   = document.getElementById('email').value;
+      var comm    = document.getElementById('comments').value;
+      // alert(user);
+      // alert(email);
+      // alert(comm);
+      
+      
+
+
+      //**--------------------Username Validation---------------------------**//
+      if(user == '')
+      {
+        document.getElementById('namecheck').innerHTML = '** Please Fill The Name Field';
+
+        return false;
+      }
+      
+      
+      if(!isNaN(user))
+      {
+        document.getElementById('namecheck').innerHTML = '** Name Must Be Start With Characters';
+
+        return false;
+      }
+
+
+      
+      //**-------------------Email Validation-------------------------------**//
+
+      if(email == '')
+      {
+        document.getElementById('emailcheck').innerHTML = '** Please Fill The Email Field';
+
+        return false;
+      }
+      
+
+      if(email.indexOf('@') <= 0)
+      {
+        document.getElementById('emailcheck').innerHTML = '** User Cannot Start With This Symbol';
+
+        return false;
+      }
+
+
+      if((email.charAt(email.length-4) != '.') && (email.charAt(email.length-3) != '.'))
+      {
+        document.getElementById('emailcheck').innerHTML = '** Dot Invalid Position';
+
+        return false;
+      }
+    
+
+
+    //**-------------------Comments Validation-------------------------------**//
+
+      if(comm == '')
+      {
+        document.getElementById('commentcheck').innerHTML = '** Please Fill The Comment Area';
+
+        return false;
+      }
+
+
+      
+      
+      
+}
+
+
+
+function insert()
+    {
+      var user    = document.getElementById('name').value;
+      var email   = document.getElementById('email').value;
+      var comm    = document.getElementById('comments').value;
+      var http    = "<?php echo base_url('Cart/sendEmail');?>";
+        $.ajax({
+          url : http,
+          method : "POST",
+          data : {'name' : user, 'email' : email, 'comm' : comm},
+          success : function(data) {
+            $('#errors').css("display","block");
+            $('#errormsgs').html('** Email Sent Successfully');
+            
+            
+          },
+          error : function(data) {
+            $('#errors').css("display","block");
+            $('#errormsgs').html('** Email Not Sent Successfully');
+            // alert('abc');
+          }
+          
+        });
+
+
+
+    }
+
+
+
+
+
+
+</script>

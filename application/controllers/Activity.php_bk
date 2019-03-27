@@ -1,0 +1,284 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Activity extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function __construct(){
+		parent::__construct();
+		
+        $this->load->model('cms_model');
+        $this->load->model('packages_model');
+        $this->load->model('settings_model');
+        $this->load->helper('text');
+        $this->load->library('cart');
+        $this->load->library('email');
+        
+		
+	}
+
+
+	public function index()
+	{
+		if($this->session->userdata('id') == '')
+		{
+			// $this->cart->destroy();
+			$data = array(
+
+			'id' => $this->input->post('id'),
+
+			'name' => $this->input->post('name'),
+
+			'price' => $this->input->post('price'),
+
+			'qty' => $this->input->post('qty'),
+
+			'stock' => 10,
+
+			'max' => 3,
+
+			'cat_id' => $this->input->post('cat_id'),
+
+			'image' => $this->input->post('image'),
+
+			'time' => $this->input->post('time'),
+
+			'details' => 'Activity',
+
+			'user_id' => 0
+
+			);
+		}
+		else
+		{
+
+			$data = array(
+
+			'id' => $this->input->post('id'),
+
+			'name' => $this->input->post('name'),
+
+			'price' => $this->input->post('price'),
+
+			'qty' => $this->input->post('qty'),
+
+			'stock' => 10,
+
+			'max' => 3,
+
+			'cat_id' => $this->input->post('cat_id'),
+
+			'image' => $this->input->post('image'),
+
+			'time' => $this->input->post('time'),
+
+			'details' => 'Activity',
+
+			'user_id' => $this->session->userdata('id')
+
+			);
+		}
+
+		
+		
+		$this->session->set_userdata('pId', $data['id']);
+		$this->session->set_userdata('actdetails', $data['details']);
+		$this->session->set_userdata('Id', md5($data['id']));
+		
+		$this->cart->insert($data);
+				
+			
+			
+		echo $this->view();
+	}
+
+
+
+	public function view()
+	{
+		$url = base_url('activities');
+		$output = '';
+		$output .='
+		
+		<div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Package</label>
+            <label class="product-price">Price</label>
+            <label class="product-quantity">Quantity</label>
+            <label class="product-removal">Remove</label>
+            <label class="product-line-price">Total</label>
+        </div>
+        <input type="hidden" name="count" id="act_count" value="'. count($this->cart->contents()).'">';
+        
+     
+        $count = 0;
+        foreach ($this->cart->contents() as $value) {
+        	# code...
+        	$count++;
+        	
+        	$output .= '
+                
+        <input type="hidden" name="act_catid" value="'.$this->session->set_userdata('ID', $value['cat_id']).'" class="act_catid" id="act_catid">
+        <input type="hidden" name="stock" value="'.$value['stock'].'" class="stock" id="stocky">
+        <input type="hidden" name="cartquantity" value="'.$value['qty'].'" class="act_cartqty" id="act_cartquantity-'.$value['rowid'].'">
+		<div class="product">
+			<div class="product-image">
+              <img src="'.$value['image'].'">
+            </div>
+            <div class="product-details">
+              <div class="product-title">'.$value['name'].'</div>
+              
+            </div>
+              
+            <div class="product-price">$'.$value['price'].'</div>
+            <div class="product-quantity">
+              <form id="myform1" method="POST" action="#">
+                  
+                  <input type="button" value="-" class="act_qtyminus" field="quantity" id="'.$value['rowid'].'" data-rowid="'.$value['rowid'].'" data-price="'.$value['price'].'"/>
+                  
+                  <input type="text" name="act_quantity" value="'.$value['qty'].'" class="act_qty" id="act_quantity-'.$value['rowid'].'" readonly/>
+                  <input type="hidden" name="maxquantity" value="'.$value['max'].'" class="max" id="maxquantity-'.$value['rowid'].'" readonly/>
+                  
+                  <input type="button" value="+" class="act_qtyplus" field="quantity" id="'.$value['rowid'].'" data-rowid="'.$value['rowid'].'" data-price="'.$value['price'].'"/>
+              </form>
+            </div>
+            <div class="product-removal">
+              <button class="act_remove-product"  id="'.$value['rowid'].'">
+                Remove
+              </button>
+            </div>
+            <div class="product-line-price" id="act_newval">$'.$value['subtotal'].'</div>
+            
+            </div>
+            ';
+        }
+        $output .= '
+            <div class="totals clearfix">            
+            <div class="totals-item totals-item-total">
+              <label>Grand Total</label>
+              <div class="totals-value" id="act_cart-total">$'.$this->cart->total().'</div>
+            </div>
+          </div>
+              <div class="action_btn clearfix">
+                
+                <button class="checkout btn_primary" onclick="check()">Checkout</button>
+              </div>';
+
+
+
+              if($count==0)
+              {
+              	$output = "<h3 align='center'>Cart is Empty</h3>
+              				<a href='".$url."'><p text-align='center'>Activity</p></a>";
+
+              }
+              return $output;
+       
+
+	}
+
+
+	public function update()
+	{
+		
+		$id = $this->input->post('id');
+		$qty = $this->input->post('qty');
+		$price = $this->input->post('price');
+
+		$data = array(
+				'rowid' => $id,
+				'qty'   => $qty,
+				'subtotal' => $price
+		);
+		$this->cart->update($data);
+		echo $this->view();
+		
+	}
+
+
+	public function remove()
+	{
+		$delid = $this->input->post('id');
+		$data = array(
+				'rowid' => $delid,
+				'qty'   => 0
+		);
+		$this->cart->update($data);
+		echo $this->view();
+	}
+
+
+
+	public function sendEmail()
+	{
+		$data = array(
+			'name'  => $this->input->post('name'),
+			'email' => $this->input->post('email'),
+			'comm'  => $this->input->post('comm')
+		);
+
+		$from= $data['email'];
+		//$to ="testdevloper007@gmail.com";
+		$to ="arijit.dutta48@gmail.com";
+		
+		
+		$subject = 'Product Enquiry'; 
+		$message="<p>Hi Admin, <br>" .$data['name']."
+		<br> Massege: ".$data['comm'].
+		"<br> Email: ".$data['email']."</p><br><br> Regards,<br>" .$data['name'];
+
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers .= 'From: '.$from."\r\n".
+			'Reply-To: '.$from."\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+		@mail($to, $subject, $message, $headers);
+								
+	}
+
+
+
+	public function login()
+	{
+		$cat_id = base64_decode($this->uri->segment(2));
+		$content_data = array();
+		$holiday = $this->cms_model->about_fetchRecord();
+		$content_data['holiday'] = $holiday;
+		$contact = $this->settings_model->contact_fetchRecord();
+		$content_data['contact'] = $contact;
+		$cat = $this->packages_model->getcatlist();
+		$catId = $cat[0]['id'];
+		$wher = ['category<>'=> $catId];
+		$deal = $this->packages_model->sidebarFetch($wher);
+    	$content_data['deal'] = $deal;
+		$this->load->view('login', $content_data);
+	}
+
+
+
+	public function busket()
+	{
+		echo $this->view();
+	}
+	
+	
+
+	
+
+	
+}

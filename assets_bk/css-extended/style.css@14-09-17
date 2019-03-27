@@ -1,0 +1,71 @@
+html, body { height: 100%; }
+body, ul, li, a, p, input { margin: 0; padding: 0; list-style: none; text-decoration: none; border: none; outline: none; }
+body { background-color: #000000; padding: 0px; margin: 0px; font-family: 'Raleway', sans-serif; }
+#gradient { width: 100%; height: 100%; padding: 0px; margin: 0px; }
+#gradient .innerwrapper { background: url(../images-extended/bg-page-section.png) repeat 0 0; height: 100%; width: 100%; position: relative; text-align: center; }
+#gradient .innerwrapper .logo { padding-bottom: 10px; }
+#gradient .innerwrapper .logo img { width: 120px; }
+#gradient .innerwrapper .laptop-img { width: 240px; }
+#gradient .innerwrapper .banner-content { left: 50%; position: absolute; text-align: center; top: 40%; transform: translate(-50%, -40%); -moz-transform: translate(-50%, -40%); -webkit-transform: translate(-50%, -40%); width: 60%; }
+#gradient .innerwrapper .getDeal { font-size: 30px; font-weight: 300; display: block; padding: 5px 0; color: #fff; }
+#gradient .innerwrapper h2 { color: #ffffff; font-size: 55px; line-height: 55px; margin: 0; padding-bottom: 15px; font-weight: 600; }
+#gradient .innerwrapper  h2 span { font-size: 36px; font-weight: 300; line-height: 36px; }
+#gradient .innerwrapper .button-box { display: inline-block; width: auto; margin: 0 8px 10px 0; vertical-align: top; position: relative; }
+#gradient .innerwrapper .button-box .option { position: absolute; width: 100%; z-index: 10; }
+#gradient .innerwrapper .button-box .option ul { width: 100%; float: left; background: #ed3050; }
+#gradient .innerwrapper .button-box .option ul li:first-child { border: 0px; }
+#gradient .innerwrapper .button-box .option ul li { color: #fff; text-align: left; border-top: 1px solid #fc4966; padding: 0 0; margin: 0px; line-height: 35px; }
+#gradient .innerwrapper .button-box .option ul li i { color: #fff; width: 26px; text-align: left; }
+#gradient .innerwrapper .button-box .option ul li a { color: #fff; display: block; padding: 0 10px; }
+#gradient .innerwrapper .button-box .option ul li a:hover { background: #000; }
+#gradient .innerwrapper a.button { display: inline-block; width: auto; height: 45px; line-height: 45px; color: #fff; text-transform: uppercase; font-weight: 500; font-size: 15px; border: 2px solid #000c22; padding: 0 20px; background: #000c22; }
+#gradient .innerwrapper a.button.red { border-color: #fff; background: transparent; color: #fff; }
+#gradient .innerwrapper a.button:hover, a.button.red:hover, a.button.active { background: #fc4966; border-color: #fc4966; color: #fff; }
+@media only screen and (max-width:1199px) {
+	#gradient .innerwrapper .banner-content { width: 80%; }
+}
+@media only screen and (max-width:979px) {
+	#gradient .innerwrapper h2 { font-size: 42px; }
+	#gradient .innerwrapper h2 span { font-size: 26px; }
+}
+@media only screen and (max-width:767px) {
+	#gradient .innerwrapper { overflow-y: auto; overflow-x: hidden; }
+	#gradient .innerwrapper .banner-content { position: relative; margin: 0 auto; width: 100%; left: auto; top: auto; transform: inherit; -webkit-transform: inherit; -moz-transform: inherit; }
+	#gradient .innerwrapper .logo { padding: 20px 0; }
+	#gradient .innerwrapper .banner-content { width: 95%; }
+	#gradient .innerwrapper h2 { font-size: 30px; padding-bottom: 20px; }
+	#gradient .innerwrapper h2 span { font-size: 18px; }
+	#gradient .innerwrapper .getDeal { font-size: 28px; padding: 10px 0 0; }
+}
+@media only screen and (max-width:639px) {
+	#gradient .innerwrapper h2 { line-height: 18px; padding: 10px 0 20px; display: inline-block; }
+	#gradient .innerwrapper .getDeal, #gradient .innerwrapper h2 { font-size: 25px; }
+}
+
+/*---------------- popup -----------------*/
+#gradient { overflow: hidden; }
+.openpop { float: right; margin: 10px 10px 0 0; border: 0px !important; background: #000 url(../images-extended/hot-deals.png) 20px center no-repeat !important; border-color: #fc4966 !important; padding: 0 20px 0 60px !important; border-radius: 40px 0 0 40px; position: absolute; right: -138px; top: 10px; transition: all 0.5s ease 0s; -webkit-transition: all 0.5s ease 0s; -moz-transition: all 0.5s ease 0s; }
+.openpop:hover { right: -10px; }
+div#overlay { background: rgba(0, 0, 0, 0.7); height: 100%; width: 100%; z-index: 10; position: fixed; left: 0; top: 0; }
+#popup { width: 60%; background: #fff; padding: 10px; position: absolute; z-index: 11; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+#close { position: absolute; right: -10px; top: -10px; width: 32px; height: 32px; border: 0px; cursor: pointer; border-radius: 25px; background: #fff url(../images-extended/error.png) center center no-repeat; text-indent: -9999px; }
+#popup img { width: 100%; display: block; }
+#mask { content: ""; position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: none; }
+.phone-block { width: auto; display: table; margin: 10px auto; background: url(../images-extended/phone-call.png) 0 center no-repeat; color: #fff; padding: 2px 0 7px 35px; font-size: 25px; }
+.social-icon { margin: 0 auto 10px; width: auto; display: table; }
+.social-icon ul { width: auto; display: inline-block; text-align: center; margin: 0 0 10px; }
+.social-icon ul li { width: auto; display: inline-block; color: #fff; margin: 0 15px; font-size: 17px; }
+.social-icon ul li span { display: inline-block; vertical-align: middle; }
+.social-icon ul li img { display: inline-block; vertical-align: middle; }
+a.email-block { width: auto; display: inline-block; margin: 0; background: url(../images-extended/mail.png) 0 center no-repeat; color: #fff; padding: 0; font-size: 17px; }
+@media only screen and (max-width:767px) {
+	#popup { width: 84% !important; }
+	.flex-direction-nav { display: none }
+}
+
+.email-row{ width: 100%; margin: 0 auto; text-align: center; display: inline-block; color: #fff; }
+
+/*############## 14-09-17 ##############*/
+@media only screen and (max-width: 639px){
+	.social-icon ul li { margin-bottom: 10px; }
+}
